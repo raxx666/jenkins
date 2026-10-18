@@ -3,16 +3,48 @@ pipeline {
     stages { 
        stage ('build'){
         agent any
+        parallel {
+           stage ('dev env') {
           steps {
-            echo "building"
-            sh 'sleep 5'
+            echo "building in dev"
+            sh 'sleep 3'
               }
+            }
+          stage ('stage1 env') {
+              steps { 
+                 echo "staging 1 env building"
+              }
+              }
+          stage ('stage 2') {
+            steps { 
+              echo "staging 2 env build"
+              }
+            }
           }
        stage ('test'){
-        agent { label 'one' }
+ agent { label 'one' } 
+parallel { 
+        stage ('regression') { 
           steps {
-            echo "testing"
-              }
+              echo "regression testing"
+              sh 'sleep 3'
+}
+}
+parallel { 
+stage ('function'){
+steps {
+echo "functional teting"
+}
+}
+stage ('integration'){
+steps {
+echo "integration testing"
+sh 'sleep 3'
+
+}
+}
+}
+}
           }
          stage ('deploy'){
         agent { label 'test1' }
@@ -20,5 +52,11 @@ pipeline {
             echo "building"
               }
           }
+        stage ('performance') {
+          steps { 
+             echo "performance testing" 
+                  sh  'sleep 3'
+              }  
+        }
 }
 }
