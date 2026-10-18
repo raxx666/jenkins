@@ -25,6 +25,7 @@ pipeline {
 
 
     stage ('test'){ 
+agent { label 'one' }
 parallel { 
         stage ('regression') { 
           steps {
