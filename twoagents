@@ -34,7 +34,6 @@ parallel {
               sh 'sleep 3'
         }
         }
-            parallel { 
             stage ('function'){
             steps {
             echo "functional teting"
@@ -48,8 +47,6 @@ parallel {
             }
 }
 }
-} 
-
          stage ('deploy'){
         agent { label 'test1' }
           steps {
