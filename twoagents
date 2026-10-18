@@ -25,9 +25,10 @@ pipeline {
 
 
     stage ('test'){ 
-agent { label 'one' }
+
 parallel { 
         stage ('regression') { 
+agent { label 'one' }
           steps {
               echo "regression testing"
               sh 'sleep 3'
