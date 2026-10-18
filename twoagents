@@ -21,7 +21,11 @@ pipeline {
               }
             }
           }
-       stage ('test'){
+}
+ 
+
+
+    stage ('test'){
  agent { label 'one' } 
 parallel { 
         stage ('regression') { 
@@ -60,4 +64,4 @@ sh 'sleep 3'
         }
 }
 }
-}
+
