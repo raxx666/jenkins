@@ -20,7 +20,7 @@ pipeline {
               echo "staging 2 env build"
               }
             }
-          }
+   }
 }
  
 
@@ -32,24 +32,24 @@ parallel {
           steps {
               echo "regression testing"
               sh 'sleep 3'
+        }
+        }
+            parallel { 
+            stage ('function'){
+            steps {
+            echo "functional teting"
+            }
+            }
+            stage ('integration'){
+            steps {
+            echo "integration testing"
+            sh 'sleep 3'
+            }
+            }
 }
 }
-parallel { 
-stage ('function'){
-steps {
-echo "functional teting"
-}
-}
-stage ('integration'){
-steps {
-echo "integration testing"
-sh 'sleep 3'
+} 
 
-}
-}
-}
-}
-          }
          stage ('deploy'){
         agent { label 'test1' }
           steps {
