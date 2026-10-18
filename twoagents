@@ -1,8 +1,7 @@
 pipeline {
-  agent none
+  agent any
     stages { 
        stage ('build'){
-        agent any
         parallel {
            stage ('dev env') {
           steps {
@@ -25,8 +24,7 @@ pipeline {
  
 
 
-    stage ('test'){
- agent { label 'one' } 
+    stage ('test'){ 
 parallel { 
         stage ('regression') { 
           steps {
